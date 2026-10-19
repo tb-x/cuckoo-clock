@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "cuckoo-clock",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "5223"],
+      "port": 5223
+    }
+  ]
+}

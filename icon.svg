@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#fdf1d6"/>
+  <g transform="translate(80 40) scale(1.1)">
+    <rect x="22" y="118" width="276" height="272" rx="20" fill="#8a5a2c" stroke="#5b3418" stroke-width="6"/>
+    <path d="M2 132 L160 10 L318 132 Z" fill="#5b3418" stroke="#4a2a12" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M38 124 L160 32 L282 124 Z" fill="#7a4a22"/>
+    <path d="M134 112 V78 A26 26 0 0 1 186 78 V112 Z" fill="#2b170a" stroke="#4a2a12" stroke-width="4"/>
+    <g transform="translate(160 86) scale(1.15)">
+      <path d="M-20 4 L-36 -4 L-33 4 L-37 12 Z" fill="#c9632b"/>
+      <ellipse cx="-3" cy="5" rx="21" ry="15" fill="#f6a93b"/>
+      <ellipse cx="2" cy="11" rx="11" ry="6" fill="#ffe2a8"/>
+      <path d="M-16 0 Q-4 -6 6 2 Q-2 14 -16 8 Z" fill="#d9822b"/>
+      <circle cx="14" cy="-9" r="12" fill="#f6a93b"/>
+      <path d="M24 -12 L38 -8 L24 -6 Z" fill="#ff7a1a"/>
+      <path d="M24 -6 L36 -1 L24 -2 Z" fill="#e85d0c"/>
+      <circle cx="17" cy="-12" r="3" fill="#2a2140"/>
+    </g>
+    <g transform="translate(160 258)">
+      <circle r="104" fill="#fffaf0" stroke="#5b3418" stroke-width="6"/>
+      <g stroke="#2a2140" stroke-width="6" stroke-linecap="round">
+        <path d="M0 -92V-80M0 92V80M92 0H80M-92 0H-80"/>
+      </g>
+      <g font-family="Verdana,Tahoma,sans-serif" font-weight="bold" font-size="30" fill="#2a2140" text-anchor="middle">
+        <text y="-52">12</text><text x="62" y="11">3</text><text y="73">6</text><text x="-62" y="11">9</text>
+      </g>
+      <path d="M-5 10 L-7 -31 L0 -52 L7 -31 L5 10Z" fill="#e8434a" stroke="#9e1f25" stroke-width="2" stroke-linejoin="round" transform="rotate(90)"/>
+      <path d="M-3 12 L-4 -62 L0 -85 L4 -62 L3 12Z" fill="#2b7de9" stroke="#164c99" stroke-width="2" stroke-linejoin="round"/>
+      <circle r="8" fill="#2a2140"/><circle r="3" fill="#ffc21a"/>
+    </g>
+  </g>
+</svg>
