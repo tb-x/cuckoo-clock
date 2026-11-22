@@ -47,9 +47,11 @@ O'clock, half past, quarter past and quarter to are recorded as whole phrases (4
 
 ## Audio credits
 
-Voices and sounds: [elevenlabs.io](https://elevenlabs.io). All clips were made on 2026-10-19 on the ElevenLabs paid **Starter** plan. The game credits ElevenLabs on its end card. The clips are not covered by any licence on this game's code and aren't licensed for reuse.
+Voices and sounds: [elevenlabs.io](https://elevenlabs.io). The clips below were made on 2026-10-19 on the ElevenLabs paid **Starter** plan, except the 2026-11-22 sound effects (paid **Creator** plan). The game credits ElevenLabs on its end card. The clips are not covered by any licence on this game's code and aren't licensed for reuse.
 
 - **The voice** (`assets/t-*.mp3`, `p-*.mp3`, `h-*.mp3` and `say-*.mp3`, 79 clips): voice "Jessica - Playful, Bright, Warm" (a stock ElevenLabs voice), model Eleven Multilingual v2, speed 0.85, stability 0.6. The 48 whole times, 8 minute parts, 12 hours, the three questions, four kinds of praise, "Oops! Try again.", the two hand hints and "You did it! Cuckoo!".
 - **Sound effects** (`assets/sfx-*.mp3`, 3 clips): ElevenLabs Sound Effects. The cuckoo call, the chime for a right answer and the tick-tock that starts a round.
 
-The small UI sounds (the hand's click, the tap, the gentle wrong-answer "bwomp" and the end fanfare) are synthesized in the browser.
+- **More sound effects** (`assets/sfx-*.mp3`, 8 clips, made on 2026-11-22 on the paid **Creator** plan): ElevenLabs Sound Effects (`eleven_text_to_sound_v2`). `sfx-hand-click` (a brass click for each step of a dragged hand), `sfx-tap` (a soft wooden button tap), `sfx-wrong` (a soft wooden bonk with a little boing), `sfx-door-open` and `sfx-door-close` (the cuckoo's door popping open and clicking shut), `sfx-fanfare` (a music-box jingle on the end card), `sfx-pendulum` (one wooden tock; two of them stand in for the tick-tock if that clip can't load) and `sfx-star` (a shimmering bell ding, not used yet).
+
+Each sound effect falls back to a synthesized version in the browser if its clip can't load.

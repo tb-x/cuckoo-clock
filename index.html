@@ -252,7 +252,7 @@ function timeSay(t) {
 const ASSET_V = 1;            // bump after replacing any file in assets/
 const CLIP_VOL = 0.8;         // sound effect clips
 const VOICE_VOL = 1;          // spoken clips
-const CLIP_TRIM = { 'sfx-cuckoo': 0.5, 'sfx-chime': 0.5 };   // per-clip level trims, measured so the effects sit near the voice's loudness
+const CLIP_TRIM = { 'sfx-cuckoo': 0.5, 'sfx-chime': 0.5, 'sfx-fanfare': 0.5, 'sfx-wrong': 0.7 };   // per-clip level trims, measured so the effects sit near the voice's loudness
 const VOICE_GAP = 0.12;       // seconds of pause after a question ("Which clock says…") before the time
 const JOIN_GAP = 0.01;        // seconds between the minutes and the hour ("twenty-five past" … "three"), so they run on like one phrase
 const SPEECH_FLOOR = 0.03;    // a 20 ms stretch quieter than this share of the clip's loudest counts as silence (keeps the soft "th" and "f")
@@ -262,6 +262,7 @@ const CLIPS = [
   'say-what-time', 'say-which-clock', 'say-show-me', 'say-yes-1', 'say-yes-2', 'say-yes-3', 'say-yes-4',
   'say-oops', 'say-hint-hour', 'say-hint-minute', 'say-done',
   'sfx-cuckoo', 'sfx-chime', 'sfx-ticktock',
+  'sfx-hand-click', 'sfx-tap', 'sfx-wrong', 'sfx-door-open', 'sfx-door-close', 'sfx-fanfare', 'sfx-pendulum',
 ];
 const sfx = (() => {
   let ac = null, out = null, noiseBuf = null, voices = [], speakTimer = 0, muted = store.get('muted', false);
@@ -351,16 +352,20 @@ const sfx = (() => {
       return delay + 0.5 + text.length * 0.07;
     },
     hush,
-    tick() { tone(2400, 1800, 0.03, 'square', 0.05); noise(0.03, 0.18, 3500); },
-    tap() { tone(520, 880, 0.08, 'triangle', 0.2); },
-    ticktock() { if (clip('sfx-ticktock')) return; [0, 0.5].forEach((d, i) => { tone(i ? 1300 : 1700, i ? 1100 : 1500, 0.04, 'square', 0.06, d); noise(0.05, 0.25, i ? 2200 : 3200, d); }); },
+    tick() { if (clip('sfx-hand-click')) return; tone(2400, 1800, 0.03, 'square', 0.05); noise(0.03, 0.18, 3500); },
+    tap() { if (clip('sfx-tap')) return; tone(520, 880, 0.08, 'triangle', 0.2); },
+    ticktock() {
+      if (clip('sfx-ticktock')) return;
+      if (clip('sfx-pendulum')) { clip('sfx-pendulum', CLIP_VOL, 0.5); return; }   // two wooden tocks
+      [0, 0.5].forEach((d, i) => { tone(i ? 1300 : 1700, i ? 1100 : 1500, 0.04, 'square', 0.06, d); noise(0.05, 0.25, i ? 2200 : 3200, d); }); },
     chime() { if (clip('sfx-chime')) return; [1047, 1319, 1568].forEach((f, i) => tone(f, f, 0.9, 'triangle', 0.16, i * 0.09)); },
     cuckoo(delay = 0) {
       if (clip('sfx-cuckoo', CLIP_VOL, delay)) return;
       [0, 0.75].forEach((d) => { tone(740, 720, 0.24, 'sine', 0.32, delay + d); tone(587, 570, 0.36, 'sine', 0.32, delay + d + 0.28); });
     },
-    bwomp() { tone(330, 220, 0.22, 'triangle', 0.22); tone(250, 160, 0.3, 'triangle', 0.18, 0.16); },
-    fanfare() { [523, 659, 784, 1047].forEach((f, i) => tone(f, f, 0.22, 'triangle', 0.24, i * 0.14)); [523, 659, 784].forEach((f) => tone(f, f, 1, 'triangle', 0.16, 0.64)); },
+    door(close = 0) { clip('sfx-door-open'); clip('sfx-door-close', CLIP_VOL, close); },   // the house's little door: open now, click shut `close` s later (silent without the clips)
+    bwomp() { if (clip('sfx-wrong')) return; tone(330, 220, 0.22, 'triangle', 0.22); tone(250, 160, 0.3, 'triangle', 0.18, 0.16); },
+    fanfare() { if (clip('sfx-fanfare')) return; [523, 659, 784, 1047].forEach((f, i) => tone(f, f, 0.22, 'triangle', 0.24, i * 0.14)); [523, 659, 784].forEach((f) => tone(f, f, 1, 'triangle', 0.16, 0.64)); },
   };
 })();
 try { speechSynthesis.getVoices(); } catch {}   // some browsers load the voice list lazily
@@ -467,6 +472,7 @@ drawBird($('end').querySelector('.bigbird'));
 function cuckoo() {   // the door opens and the bird pops out
   house.classList.remove('pop'); void house.getBoundingClientRect(); house.classList.add('pop');
   setTimeout(() => house.classList.remove('pop'), 1600);
+  sfx.door(1.75);   // the shutters start closing at 1.6 s and meet about 0.15 s later
   sfx.cuckoo(0.08);
 }
 
